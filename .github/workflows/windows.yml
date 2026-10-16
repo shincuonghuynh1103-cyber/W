@@ -1,0 +1,20 @@
+
+name: Windows Runner Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: windows-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check Windows version
+        shell: pwsh
+        run: |
+          Get-ComputerInfo |
+            Select-Object WindowsProductName,
+                          WindowsVersion
+          Get-CimInstance Win32_VideoController |
+            Select-Object Name
